@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Charities List</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <section class="logo">
+    <img src="images/helphub.png" alt="logo" />
+  </section>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="charities.html">Charities List</a></li>
+        <li><a href="charity_profile.html">Charity Profile page</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h2>Charities List</h2>
+    <div class="charities-container">
+      <div class="charity">
+        <h3>Compassion International</h3>
+        <p>Helping children in poverty worldwide.</p>
+        <a href="charity-profile-1.html" class="profile-button">Volunteer Now</a>
+      </div>
+      <div class="charity">
+        <h3>Save The Children</h3>
+        <p>
+          Improving the lives of children through education and health care.
+        </p>
+        <a href="charity-profile-2.html" class="profile-button">Volunteer Now</a>
+      </div>
+      <div class="charity">
+        <h3>Child Fund</h3>
+        <p>Providing children everywhere with opportunities to thrive.</p>
+        <a href="charity-profile-3.html" class="profile-button">Volunteer Now</a>
+      </div>
+    </div>
+    <div id="donors">
+    </div>
+  </main>
+
+  <footer>
+    <p>Contact Us: info@helphub.com</p>
+  </footer>
+  <script src="charity_profile.js"></script>
+</body>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    fetch('https://randomuser.me/api')
+      .then(response => response.json())
+      .then(data => {
+        const user = data.results[0];
+        const userInfoSection = document.createElement('section');
+        userInfoSection.classList.add('user-info');
+        userInfoSection.innerHTML = `
+          <h3>Out Latest Donor:</h3>
+          <div>
+            <p>Name: ${user.name.first} ${user.name.last}</p>
+            <p>Email: ${user.email}</p>
+            <p>Location: ${user.location.city}, ${user.location.country}</p>
+          </div>
+        `;
+        document.getElementById('donors').appendChild(userInfoSection);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  });
+</script>
+
+</html>
